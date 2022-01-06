@@ -1,0 +1,9 @@
+{
+    "name": "maximgofman/htdocs",
+    "autoload": {
+        "psr-4": {
+            "app\\": "app/"
+        }
+    },
+    "require": {}
+}
