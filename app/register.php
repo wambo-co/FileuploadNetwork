@@ -25,6 +25,7 @@ class register
     }*/
     public function newUser()
     {
+
         $createHashPassword = password_hash($this->password, PASSWORD_DEFAULT);
         $cmd = "INSERT INTO `useraccounts` (`ID`, `username`, `password`, `email`) VALUES (NULL, '$this->name', '$createHashPassword', '$this->email'); ";
         $this->mysqlconnection->query($cmd);

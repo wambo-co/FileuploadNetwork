@@ -2,14 +2,25 @@
 require_once('vendor/autoload.php');
 require_once('sqlconnect.php');
 
-use app\test;
 use app\register;
+use app\isUsernameAvailable;
 
 if(isset($_POST['submit'])){
-    $regist = new register($_POST['username'], $_POST['password'], $_POST['email'], $mysqli);
-    $regist->newUser();
-    header("Location: login.php?loginStatus=newuser");
+
+    if((new isUsernameAvailable($_POST['username'], $mysqli))->check()){
+        $regist = new register($_POST['username'], $_POST['password'], $_POST['email'], $mysqli);
+        $regist->newUser();
+        header("Location: login.php?loginStatus=newuser");
+    }else{
+        header("Location: regist.php?registrationStatus=userAlreadyAssigned");
+    }
 }
+if(isset($_GET['registrationStatus'])){
+    if($_GET['registrationStatus'] == "userAlreadyAssigned"){
+        echo "Diesen Benutzer gibt es bereits. Bitte wähle einen anderen Namen aus!";
+    }
+}
+
 ?>
 
 <html>

@@ -16,7 +16,7 @@ class deleteUserData
     public function delete()
     {
         $command = "DELETE FROM `userfiles` WHERE `userfiles`.`id` = $this->targetFile;";
-         return $this->mysqlconnection->query($command);
+         return $this->mysqlConnection->query($command);
     }
 
 }
