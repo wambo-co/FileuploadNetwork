@@ -29,7 +29,6 @@ class register
 
         $this->getID($this->name, $this->mysqlconnection);
 
-
         // wir brauchen die ID um ein neues Space zu erstellen
         //-> Space erstellen
 
