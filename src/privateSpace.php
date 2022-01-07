@@ -1,53 +1,37 @@
 <?php
+session_start();
+require_once ('../vendor/autoload.php');
 require_once ('../sqlconnect.php');
 
-session_start();
+
 
 use app\upload;
+use app\getuserid;
+use app\getuserdata;
 
-
-
-
+// Check //
 if($_SESSION['username'] == NULL){
     session_destroy();
     header("Location: ../login.php?loggedOut=sessionExpired");
 }else{
     echo $_SESSION['username']." hat sich erfolreich eingeloggt";
-
 }
-
 if(isset($_POST['submit'])){
     session_destroy();
     header("Location: ../login.php?loginStatus=logout");
 }
 
+$id = (new getuserid($_SESSION['username'], $mysqli))->getID();
+echo $id;
 
-
-
-
-
-
-
-$username = $_SESSION['username'];
-$query = "SELECT * FROM `useraccounts` WHERE `username` LIKE '$username'";
-$result = mysqli_query($mysqli, $query);
-$check = mysqli_fetch_array($result);
-echo $check[0]; // nun habe ich die id
-
-$id = $check[0];
-
-$new = "SELECT * FROM `userdata` WHERE `userid` LIKE '$id';";
-$res = mysqli_query($mysqli, $new);
-$update = mysqli_fetch_array($res);
-echo "<br>User daten:";
-echo $update[1]."<br>";
-$oldData = $update[1];
+$userdata = (new getuserdata($id, $mysqli))->getData();
+echo $userdata;
 
 if(isset($_POST['upload'])){
-
     $newdata = $_POST['text'];
-    $command = "UPDATE `userdata` SET `data` = '$oldData''$newdata' WHERE `userdata`.`userid` = $id";
-    return $mysqli->query($command);
+   // INSERT INTO userdata (userid, data) VALUES ('12', 'sfff');
+    $command = "UPDATE `userdata` SET `data` = $newdata WHERE `userdata`.`userid` = $id";
+    $mysqli->query($command);
 }
 
 
