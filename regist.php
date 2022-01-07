@@ -10,8 +10,6 @@ if(isset($_POST['submit'])){
     $regist->newUser();
     header("Location: login.php?loginStatus=newuser");
 }
-
-
 ?>
 
 <html>

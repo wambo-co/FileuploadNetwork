@@ -2,6 +2,7 @@
 
 namespace app;
 
+
 class register
 {
     protected $name;
@@ -16,24 +17,19 @@ class register
         $this->email = $email;
         $this->mysqlconnection = $mysqlconnection;
     }
+    /*
     public function newUser()
     {
         $createHashPassword = password_hash($this->password, PASSWORD_DEFAULT);
        return $this->mysqlconnection->query("INSERT INTO `useraccounts` (`ID`, `username`, `password`, `email`) VALUES (NULL, '$this->name', '$createHashPassword', '$this->email')");
-    }
-
-    public function newUser2()
+    }*/
+    public function newUser()
     {
         $createHashPassword = password_hash($this->password, PASSWORD_DEFAULT);
-        return $this->mysqlconnection->query("INSERT INTO `useraccounts` (`ID`, `username`, `password`, `email`) VALUES (NULL, '$this->name', '$createHashPassword', '$this->email');");
-
-        $this->getID($this->name, $this->mysqlconnection);
-
-        // wir brauchen die ID um ein neues Space zu erstellen
-        //-> Space erstellen
-
+        $cmd = "INSERT INTO `useraccounts` (`ID`, `username`, `password`, `email`) VALUES (NULL, '$this->name', '$createHashPassword', '$this->email'); ";
+        $this->mysqlconnection->query($cmd);
+        // INSERT INTO `userfiles` (`username`, `files`, `groups`, `extra`) VALUES ('$this->name', '-', '-', '-')";
     }
 
-// Beim registieren muss eine neue Space eingerichtet werden!
 
 }

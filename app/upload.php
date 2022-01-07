@@ -4,25 +4,26 @@ namespace app;
 
 class upload
 {
-    protected $id;
-    protected $currentfile;
+    protected $userid;
     protected $file;
+    protected $fileSize;
+    protected $date;
     protected $mysqlconnection;
 
 
-    public function __construct($id, $currentfile,$file, $mysqlconnection)
+    public function __construct($userid, $file, $fileSize, $date, $mysqlconnection)
     {
-        $this->id = $id;
+        $this->userid = $userid;
         $this->file = $file;
+        $this->fileSize = $fileSize;
+        $this->date = $date;
         $this->mysqlconnection = $mysqlconnection;
-        $this->currentfile = $currentfile;
     }
-
 
     public function upload()
     {
-
-       return $this->mysqlconnection->query("UPDATE `userdata` SET `data` = 'test' WHERE `userdata`.`userid` = $this->id");
+        $command = "INSERT INTO `userfiles` (`id`, `userid`, `filename`, `filesize`, `date`) VALUES (NULL, '$this->userid', '$this->file','$this->fileSize', '$this->date');";
+        return $this->mysqlconnection->query($command);
     }
 
 }

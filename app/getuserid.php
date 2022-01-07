@@ -4,15 +4,15 @@ namespace app;
 
 class getuserid
 {
-    protected $username;
-    protected $mysqlConnection;
+    public $username;
+    public $mysqlConnection;
 
     public function __construct($username, $mysqlConnection)
     {
         $this->username = $username;
         $this->mysqlConnection = $mysqlConnection;
-    }
 
+    }
     public function getID()
     {
         $command = "SELECT * FROM `useraccounts` WHERE `username` LIKE '$this->username';";
@@ -21,6 +21,5 @@ class getuserid
         return $useraccountsDB[0];
 
     }
-
-
 }
+

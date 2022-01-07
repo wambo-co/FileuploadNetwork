@@ -8,6 +8,8 @@ require_once ('../sqlconnect.php');
 use app\upload;
 use app\getuserid;
 use app\getuserdata;
+use app\deleteUserData;
+
 
 // Check //
 if($_SESSION['username'] == NULL){
@@ -20,20 +22,60 @@ if(isset($_POST['submit'])){
     session_destroy();
     header("Location: ../login.php?loginStatus=logout");
 }
+if(isset($_GET['upload'])){
+    if($_GET['upload'] == "success"){
+        echo "<br>Datei wurde erfolgreich hochgeladen</br>";
+    }
+}
+if(isset($_GET['delete'])){
+    $targetFile = $_GET['delete'];
+   echo (new deleteUserData($targetFile, $mysqli))->delete();
 
-$id = (new getuserid($_SESSION['username'], $mysqli))->getID();
-echo $id;
-
-$userdata = (new getuserdata($id, $mysqli))->getData();
-echo $userdata;
-
-if(isset($_POST['upload'])){
-    $newdata = $_POST['text'];
-   // INSERT INTO userdata (userid, data) VALUES ('12', 'sfff');
-    $command = "UPDATE `userdata` SET `data` = $newdata WHERE `userdata`.`userid` = $id";
-    $mysqli->query($command);
 }
 
+
+
+$userid = (new getuserid($_SESSION['username'], $mysqli))->getID();
+
+
+/*
+ *         0=> 'id',
+        1=> 'userid',
+        2=> 'filename',
+        3=> 'filesize',
+        4=> 'date'
+ */
+$userdata = (new getuserdata($userid,2, $mysqli))->getData();
+$userdataid = (new getuserdata($userid,0, $mysqli))->getData();
+
+echo "insgesamt: ".(new getuserdata($userid,2, $mysqli))->getDataRange()." Daten wurden gefunden";
+// userdata ist nun ein array userdata[0] erste datei zum beispiel
+
+//nur ein beispiel:
+echo "<br>";
+foreach ($userdata as $item){
+    echo $item."<br>";
+}
+
+foreach ($userdataid as $item){
+    echo "<a href='privateSpace.php?delete=$item'>Delete</a>".$item."<br>";
+
+}
+////
+
+
+
+$username = $_SESSION['username'];
+$file = $_POST['file'];
+$fileSize = "0";
+$fileUploadDate = "0";
+
+// JETZT DAS MAN DIE DATEIEN AUCH HOCHLADEN KANN <---
+if(isset($_POST['upload'])){
+    (new upload($userid, $file, $fileSize, $fileUploadDate, $mysqli))->upload();
+    header("Location: privateSpace.php?upload=success");
+
+}
 
 
 ?>
@@ -43,7 +85,7 @@ if(isset($_POST['upload'])){
 </head>
 <body>
 <form action="" method="post">
-    <input type="text" name="text">
+    <input type="text" name="file">
     <button type="submit" name="upload">Upload new File</button>
     <button type="submit" name="submit">Ausloggen</button>
 </form>
