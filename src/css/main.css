@@ -1,0 +1,41 @@
+body
+{
+    background: rgb(202,254,255,0);
+    background: linear-gradient(0deg, rgba(0,0,0,0.1) 0%, rgba(255,255,255,1) 100%);
+    display:flex;
+    justify-content: center;
+}
+.admin-space
+{
+    height:5em;
+    background-color:black;
+    width:100%;
+    display:flex;
+    position: absolute;
+    justify-content: center;
+    color:white;
+    opacity: 0.3;
+
+}
+.form-box
+{
+    position:absolute;
+    width: 30em;
+    margin-top:10em;
+}
+.notification-box
+{
+    width: 30em;
+}
+
+.user-box
+{
+    height:15em;
+    width:30em;
+}
+
+.data-box-item
+{
+    display:flex;
+    justify-content: space-between;
+}

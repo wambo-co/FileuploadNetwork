@@ -1,30 +1,44 @@
-<?php
-if(isset($_GET['loggedOut'])){
-    if($_GET['loggedOut'] == "sessionExpired"){
-        echo "Sitzung abgelaufen";
-    }
-}else if(isset($_GET['loginStatus'])){
-    if($_GET['loginStatus'] == "fail"){
-        echo "Nutzer konnte nicht eingeloggt werden. Password oder Benutzername exisitiert nicht!";
-    }else if($_GET['loginStatus'] == "logout"){
-        echo "Sitzung wurde beendet, Nutzer wurde erfolgreich ausgeloggt!";
-    }else if($_GET['loginStatus'] == "newuser"){
-        echo "Neuer Nutzer wurde erfolgreich angelegt, sie können sich jetzt einloggen";
-    }
-}
-?>
+
 <html>
 <head>
-    <title>Login</title>
+    <?php
+    session_start();
+    include ('elements/header.php');
+    ?>
 </head>
 <body>
-    <form action="src/login.php" method="post">
-        <label>Username: </label><input type="text" name="username"><br>
-        <label>Password: </label><input type="password" name="password"><br>
-        <button type="submit" name="submit">Einloggen</button>
+
+<div class="is-vcentered has-text-centered ">
+    <div class="notification is-warning notification-box"><b>
+    <?php
+    if(isset($_GET['loggedOut'])){
+        if($_GET['loggedOut'] == "sessionExpired"){
+            echo "Sitzung abgelaufen!";}
+    }else if(isset($_GET['loginStatus'])){
+        if($_GET['loginStatus'] == "fail"){
+            echo "Nutzer konnte nicht eingeloggt werden. Password oder Benutzername exisitiert nicht!";
+        }else if($_GET['loginStatus'] == "logout"){
+            session_destroy();
+            echo "Sitzung wurde beendet, Nutzer wurde erfolgreich ausgeloggt!";
+        }else if($_GET['loginStatus'] == "newuser"){
+            echo "Neuer Nutzer wurde erfolgreich angelegt, sie können sich jetzt einloggen";
+        }
+    }
+    ?></b></div>
+</div>
+    <form action="src/login.php" method="post" class="box form-box">
+        <div class="field">
+            <label class="label">Username: </label><input class="input is-small" type="text" name="username">
+        </div>
+        <div class="field">
+            <label class="label">Password: </label><input class="input is-small" type="password" name="password">
+        </div>
+        <div class="field">
+            <button class="button is-dark" type="submit" name="submit">Einloggen</button>
+            <br>
+            <b><u><a href="regist.php" class="has-text-dark is-size-7">Noch keinen Account? Jetzt registrieren!</a></u><b>
+        </div>
+
     </form>
-<a href="regist.php">
-    Registrieren
-</a>
 </body>
 </html>
