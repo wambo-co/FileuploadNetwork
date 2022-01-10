@@ -19,33 +19,20 @@ if($_SESSION['username'] == NULL){
     session_destroy();
     header("Location: ../login.php?loggedOut=sessionExpired");
 }
-
 if(isset($_POST['submit'])){
     session_destroy();
     header("Location: ../login.php?loginStatus=logout");
 }
-
-
-
-
-
+if(isset($_GET['delete'])){
+    echo "<br>Datei wurde erfolgreich gelöscht<br>";
+}
 echo "<br>";
-foreach ($userdata as $item){
-   echo $item."</a><br>";
-
+for($i = 0; $i < count($userdata); $i++){
+    echo $userdata[$i]." "; // Dateiname
+    echo "<a href='fileUploadService/$dataLocation[$i]'download>Herunterladen</a>"; // Dateilink
+    echo "<a href='fileUploadService/$dataLocation[$i]'>Öffnen</a>";
+    echo "<a href='fileDelete.php?delete=$userdataid[$i]'>Löschen</a><br>";
 }
-foreach ($dataLocation as $location){
-    echo "<a href='fileUploadService/$location'download>Download</a>";
-    echo "<a href='fileUploadService/$location'>Open</a>";
-}
-
-
-foreach ($userdataid as $item){
-    echo "<a href='fileDelete.php?delete=$item'>Delete</a>".$item."<br>";
-
-}
-////
-
 $username = $_SESSION['username'];
 if(isset($_GET['upload'])){
     if($_GET['upload'] == "success"){

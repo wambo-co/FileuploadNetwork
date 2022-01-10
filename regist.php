@@ -21,9 +21,7 @@ if(isset($_GET['registrationStatus'])){
         echo "Diesen Benutzer gibt es bereits. Bitte wähle einen anderen Namen aus!";
     }
 }
-
 ?>
-
 <html>
 <head>
     <title>Registration</title>
