@@ -11,6 +11,7 @@ if(isset($_POST['submit'])){
         $regist = new register($_POST['username'], $_POST['password'], $_POST['email'], $mysqli);
         $regist->newUser();
         header("Location: login.php?loginStatus=newuser");
+
     }else{
         header("Location: regist.php?registrationStatus=userAlreadyAssigned");
     }

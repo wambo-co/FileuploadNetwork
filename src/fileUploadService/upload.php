@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['submit'])){
+if(isset($_POST['upload'])){
     $file = $_FILES['file'];// FILES kriegt alles was gesubmitet wurde
 
     $fileName = $_FILES['file']['name'];
@@ -12,16 +12,17 @@ if(isset($_POST['submit'])){
     $allowedFileSize = 15000;
     $allowedFileSize_mb = $allowedFileSize/1000;
     $fileSize_mb = $fileSize/1000000;
+    $uploadTime = date("F j, Y, g:i a");
 
     if(in_array($fileExt[1], $allowed)){
         if($fileError == 0){
             if($fileSize_mb <  $allowedFileSize_mb) {
                 $new_file_name = uniqid('', true).".".$fileExt[1];
-                $fileDestination = "uploads/$new_file_name"."_$fileName";
+                $fileDestination = "uploads/$new_file_name";
                 move_uploaded_file($fileTMP, $fileDestination);
-                header("location: index.php?upload=success");
+                header("location: ../fileUpload.php?upload=success&fileSize=$fileSize&fileName=$fileName&fileDestination=$fileDestination&uploadTime=$uploadTime");
             }else{
-                header("location: index.php?upload=errorsize");
+                header("location: ../fileUpload.php?upload=errorsize");
               echo "zu groß die Datei es ist nur ". $allowedFileSize_mb. "MB erlaubt";
               echo "<br>"."Deine datei hat: ".$fileSize_mb."MB";
             }
@@ -30,18 +31,8 @@ if(isset($_POST['submit'])){
         }
 
     }else {
-        header("location: index.php?upload=wrongtype");
+        header("location: ../fileUpload.php?upload=wrongtype");
     }
 
-}else if(isset($_GET['del'])){
-   $dateiname = $_GET['del'];
-   if(!unlink($dateiname)){
-       header('Location: index.php?del=error');
-   }else{
-       header('Location: index.php?del=success');
-   }
-
-
-
 }
-?>
+
