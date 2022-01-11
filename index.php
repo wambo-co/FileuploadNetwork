@@ -1,9 +1,7 @@
-
 <html>
 <head>
     <?php
     include ('elements/header.php');
-    //header("Location: login.php");
     ?>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,11 +17,10 @@
             transform: translateY(-30px);
             animation-fill-mode: forwards;
         }
-        h1
+        #topic
         {
             font-family: lato;
             font-weight: bold;
-
         }
         @keyframes intro {
             0%{
@@ -37,17 +34,14 @@
                 transform: translateY(0px);
 
             }
-
         }
-
     </style>
-
 </head>
 <body>
 <div class="anim-box">
-    <a href="login.php"><h1>FileUploadNetwork</h1></a>
+    <a href="login.php"><h1 id="topic">FileUploadNetwork</h1></a>
 </div>
-
 </body>
+<script src="src/js/openingAnimation.js"></script>
 </html>
 
