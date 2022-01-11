@@ -37,9 +37,9 @@ $userPicture =  $userSource[4];
 $userStatus = $userSource[5];
 $userGroup = $userSource[6];
 
-$userStorageSpace = "/";
-$userFreeStorageSpace = "/";
-$userUsedStorageSpace = "/";
+$userStorageSpace = "10 GB";
+$userFreeStorageSpace = "1024 MB";
+$userUsedStorageSpace = "10 MB";
 
 
 /*
@@ -52,7 +52,7 @@ $userUsedStorageSpace = "/";
     <article class="media">
         <div class="media-left">
             <figure class="image is-64x64">
-                <img src="<?php echo $userPicture?>" alt="Image">
+                <img src="<?php echo $userPicture?>" onerror="this.onerror=null; this.src='../assets/pictures/default.webp'" alt="Image">
             </figure>
         </div>
         <div class="media-content">
@@ -66,16 +66,20 @@ $userUsedStorageSpace = "/";
                     <br>
                     Speicherplatz: <?php echo $userStorageSpace ?>
                     <br>
-                    <progress class="progress" value="15" max="100">15%</progress>
+                    <progress class="progress" value="5" max="100">15%</progress>
                     Du hast bereits <?php echo $userUsedStorageSpace ?> von <?php echo $userStorageSpace ?>
                     verbraucht.
                     <br>
                     </p>
-                <a href="fileUpload.php">Eine neue Datei hochladen</a>
-
+                <!--<a href="fileUpload.php">Zu deinen Datein</a>
+-->
             </div>
         </div>
     </article>
 </div>
+
+<?php
+require_once ('fileUpload.php');
+?>
 </body>
 </html>

@@ -102,5 +102,12 @@ if($_SESSION['username'] == "admin"){
             </div>
     </div>
     </div>
+<?php
+require_once ('space.php');
+?>
 </body>
 </html>
+<!--
+Idee wenn man auf die Datei klickt dann soll sich das ganze Feld nach links bewegen und rechts sind dann einstellungen zu der DAtei
+z.b. wie oft sie runtergeladen wurde wann etc. wie viele Bytes
+-->

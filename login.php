@@ -4,6 +4,9 @@
     <?php
     session_start();
     include ('elements/header.php');
+    if(isset($_SESSION['username'])){
+        header("Location: src/fileUpload.php");
+    }
     ?>
 </head>
 <body>
