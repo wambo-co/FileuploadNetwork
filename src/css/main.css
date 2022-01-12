@@ -11,14 +11,14 @@ body
 @keyframes open {
     0%{
         transform: translateX(1px);
-        filter: blur(2px);
+        filter: blur(2px) brightness(100%);
     }
     30%{
-        transform: translateX(-1px);
+        transform: translateX(-4px);
     }
     60%{
         transform: translateX(1px);
-        filter: blur(2px) gray(10);
+        filter: blur(2px) brightness(95%);
     }
     80%{
         transform: translateX(-1px);
