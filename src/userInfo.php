@@ -1,53 +1,17 @@
 <?php
-session_start();
-require_once ('../vendor/autoload.php');
-require_once ('../sqlconnect.php');
-
-use app\getuserid;
-use app\getAccountInformation;
-
-if($_SESSION['username'] == NULL){
-    session_destroy();
-    header("Location: ../login.php?loggedOut=sessionExpired");
-}else{
-    $username = $_SESSION['username'];
-}
-
-if($_SESSION['username'] == "admin"){
-    echo "
-    <div class='admin-space'><h3>Admin Bereich</h3></div>
-   ";
-}
-
-
-?>
-
-<html>
-<head>
-    <title>Welcome</title>
-    <?php
-    include ('../elements/header.php');
-    ?>
-</head>
-<body>
-<?php
-$userSource = (new getAccountInformation($username, $mysqli))->getDataArray();
+use app\userInformation;
+$userLoggedIn = new userInformation($username, $mysqli);
+$userSource = $userLoggedIn->getUserAccountInformation();
 $userEmail =  $userSource[3];
 $userPicture =  $userSource[4];
 $userStatus = $userSource[5];
 $userGroup = $userSource[6];
-
 $userStorageSpace = "10 GB";
 $userFreeStorageSpace = "1024 MB";
 $userUsedStorageSpace = "10 MB";
+$userUsedStoragePercent = "30";
 
-
-/*
- * <a href="fileUpload.php">Dateien hochladen</a>
-
- */
 ?>
-
 <div class="box user-box">
     <article class="media">
         <div class="media-left">
@@ -66,20 +30,14 @@ $userUsedStorageSpace = "10 MB";
                     <br>
                     Speicherplatz: <?php echo $userStorageSpace ?>
                     <br>
-                    <progress class="progress" value="5" max="100">15%</progress>
+                    <progress class="progress"  value="<?=$userUsedStoragePercent?>" max="100"></progress>
                     Du hast bereits <?php echo $userUsedStorageSpace ?> von <?php echo $userStorageSpace ?>
                     verbraucht.
                     <br>
-                    </p>
-                <!--<a href="fileUpload.php">Zu deinen Datein</a>
--->
+                </p>
             </div>
         </div>
     </article>
 </div>
 
-<?php
-require_once ('fileUpload.php');
-?>
-</body>
-</html>
+<!--<script src="js/progressbarAnimation.js"></script>  Animation wird immer wieder abgespielt-->

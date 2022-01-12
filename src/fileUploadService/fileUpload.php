@@ -1,7 +1,6 @@
 <?php
 if(isset($_POST['upload'])){
-    $file = $_FILES['file'];// FILES kriegt alles was gesubmitet wurde
-
+    $file = $_FILES['file'];
     $fileName = $_FILES['file']['name'];
     $fileTMP = $_FILES['file']['tmp_name'];
     $fileSize = $_FILES['file']['size'];
@@ -29,10 +28,8 @@ if(isset($_POST['upload'])){
         }else {
             echo "Probleme beim uploaden";
         }
-
     }else {
         header("location: ../fileUpload.php?upload=wrongtype");
     }
-
 }
 

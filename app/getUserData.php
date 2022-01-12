@@ -2,7 +2,7 @@
 
 namespace app;
 
-class getuserdata
+class getUserData extends upload
 {
     protected $userid;
     protected $mysqlConnection;
