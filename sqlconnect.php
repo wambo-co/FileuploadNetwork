@@ -15,3 +15,4 @@ $mysqli = @new mysqli(
 if ($mysqli->connect_error) {
     exit();
 }
+

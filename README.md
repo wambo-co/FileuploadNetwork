@@ -11,3 +11,16 @@
 
 - Save/Open/Delete Files 
 <img width="1011" alt="Screenshot 2022-01-12 at 01 44 22" src="https://user-images.githubusercontent.com/90763005/149140030-5d2b52cd-72ff-49af-9e8f-91a23bc5a191.png">
+
+
+klassen groß schreiben
+
+
+src kein css und js
+
+sr c-> app
+app-> alle klassen
+
+nur index.php
+alles in index.php
+

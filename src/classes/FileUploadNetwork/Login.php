@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
-class login
+class Login
 {
     protected $username;
     protected $password;

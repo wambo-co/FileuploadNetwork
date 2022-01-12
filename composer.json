@@ -1,8 +1,8 @@
 {
-    "name": "maximgofman/htdocs",
+    "name": "maximgofman/fileupload-network",
     "autoload": {
         "psr-4": {
-            "app\\": "app/"
+            "fileUploadNetwork\\": "src/classes/FileUploadNetwork"
         }
     },
     "require": {}

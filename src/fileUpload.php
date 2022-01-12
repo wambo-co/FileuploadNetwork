@@ -1,26 +1,34 @@
 <?php
 session_start();
 require_once('../vendor/autoload.php');
-require_once('../sqlconnect.php');
 use app\upload;
 use app\userInformation;
 use app\getUserData;
 use app\storageController;
 use app\convertUnit;
+use app\MysqlConnection;
 
+
+$db_host = 'localhost';
+$db_user = 'root';
+$db_password = 'root';
+$db_db = 'uploadyourdata';
+
+$connection = new MysqlConnection($db_host, $db_user,$db_password,$db_db);
 
 $username = $_SESSION['username'];
 
 
-$userLoggedIn = new userInformation($_SESSION['username'], $mysqli);
+$userLoggedIn = new userInformation($_SESSION['username'], $connection->getMysqli());
 $userId = $userLoggedIn->getUserId();
 
-$userFiles = (new getUserData($userId, $mysqli));
+$userFiles = new getUserData($userId, $mysqli);
 $userdata = $userFiles->getData();
 $userdataid = $userFiles->getDataId();
 $dataLocation = $userFiles->getDataLocation();
 $dataUploadTime = $userFiles->getDataUploadTime();
 $dataSize = $userFiles->getDataSize();
+// Klassen mit einem Grpß buchstaben anfangen
 
 
 ?>
@@ -30,9 +38,9 @@ $dataSize = $userFiles->getDataSize();
     <title>Private Space</title>
 </head>
 <body>
-    <div class="box">
-        <div class="is-vcentered has-text-centered ">
-            <div class="notification is-warning notification-box"><b>
+    <div class='box'>
+        <div class='is-vcentered has-text-centered '>
+            <div class='notification is-warning notification-box'><b>
                     <?php
                     if($_SESSION['username'] == NULL){
 
@@ -76,16 +84,16 @@ $dataSize = $userFiles->getDataSize();
                     ?>
                 </b>
             </div>
-        <form action="fileUploadService/fileUpload.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="file" class="form-control-file">
-            <button type="submit" name="upload" class="button is-small is-light">Hochladen</button>
-            <button class="button is-small " onclick="window.open('userInfo.php')"><i class="bi bi-person-fill"></i></button>
-            <button  name="submit" class="button is-small" onclick="window.open('../login.php?loginStatus=logout')"><i class="bi bi-box-arrow-right"></i></button>
+        <form action='fileUploadService/fileUpload.php' method='post' enctype='multipart/form-data'>
+            <input type='file' name='file' class='form-control-file'>
+            <button type='submit' name='upload' class='button is-small is-light'>Hochladen</button>
+            <button class='button is-small ' onclick='window.open('userInfo.php')'><i class='bi bi-person-fill'></i></button>
+            <button  name='submit' class='button is-small' onclick='window.open('../login.php?loginStatus=logout')'><i class='bi bi-box-arrow-right'></i></button>
         </form>
         </div>
         <div>
             <p>Deine Daten:</p>
-            <div class="box data-box">
+            <div class='box data-box'>
                 <?php
                 for($i = 0; $i < count($userdata); $i++){
                     $fileConverter = new convertUnit($dataSize[$i]);

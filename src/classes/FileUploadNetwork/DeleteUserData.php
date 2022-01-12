@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
-class deleteUserData
+class DeleteUserData
 {
     protected $targetFile;
     protected $mysqlConnection;

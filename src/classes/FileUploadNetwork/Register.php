@@ -1,9 +1,9 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
 
-class register
+class Register
 {
     protected $name;
     protected $password;

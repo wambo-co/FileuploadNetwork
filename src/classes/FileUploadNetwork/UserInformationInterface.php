@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
-interface userInformationInterface
+interface UserInformationInterface
 {
     public function __construct($username, $mysqlConnection);
     public function isUserAviable();

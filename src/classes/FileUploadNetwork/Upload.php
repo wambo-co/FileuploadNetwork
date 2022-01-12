@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
-class upload
+class Upload
 {
     protected $userid;
     protected $file;

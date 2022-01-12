@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
-class storageController
+class StorageController
 {
     //TODO: info wie viel zur verfügung , wie viel verbraucht
     // Wenn man eine Datei hochlädt dann soll er die Dateigröße abziehen

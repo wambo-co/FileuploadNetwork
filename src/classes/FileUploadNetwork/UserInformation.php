@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
-class userInformation implements userInformationInterface
+class UserInformation implements userInformationInterface
 {
     protected $username;
     protected $mysqlConnection;

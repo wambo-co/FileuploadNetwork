@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
-class convertUnit
+class ConvertUnit
 {
     protected $fileSize;
 

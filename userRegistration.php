@@ -31,22 +31,7 @@ use app\userInformation;
                 }
                 ?></b></div>
     </div>
-    <form action="userRegistration.php" method="post" class="box form-box">
-        <div class="field">
-            <label class="label">Username:<input class="input is-small" type="text" name="username" placeholder="username"></label>
-        </div>
-        <div class="field">
-            <label class="label">Password:<input class="input is-small" type="password" name="password" placeholder="password"></label>
-        </div>
-        <div class="field">
-            <label class="label">E-mail: <input class="input is-small" type="text" name="email" placeholder="example@mail.com"></label>
-        </div>
-        <div class="field">
-            <button class="button is-dark" type="submit" name="submit">Registrieren</button>
-            <br>
-            <b><u><a href="login.php" class="has-text-dark is-size-7">Du hast schon einen Account? Jetzt einloggen!</a></u><b>
-        </div>
-    </form>
+
 </body>
 </html>
 

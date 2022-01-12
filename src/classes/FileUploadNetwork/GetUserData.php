@@ -1,8 +1,8 @@
 <?php
 
-namespace app;
+namespace fileUploadNetwork;
 
-class getUserData extends upload
+class GetUserData extends upload
 {
     protected $userid;
     protected $mysqlConnection;
