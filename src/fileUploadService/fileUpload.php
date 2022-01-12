@@ -5,6 +5,10 @@ require_once ("../../vendor/autoload.php");
 use app\storageController;
 
 
+
+
+
+
 if(isset($_POST['upload'])){
     $file = $_FILES['file'];
     $fileName = $_FILES['file']['name'];
@@ -13,8 +17,8 @@ if(isset($_POST['upload'])){
     $fileError = $_FILES['file']['error'];
     $fileType = $_FILES['file']['type'];
     $fileExt = explode('.', $fileName);
-    $allowed = array('jpg', 'pdf', 'png', 'json', 'php');
-    $allowedFileSize = 15000;
+    $allowed = array('jpg', 'pdf', 'png', 'json', 'php', 'html');
+    $allowedFileSize = 150000000;
     $allowedFileSize_mb = $allowedFileSize/1000;
     $fileSize_mb = $fileSize/1000000;
     $uploadTime = date("F j, Y, g:i a");
@@ -34,7 +38,7 @@ if(isset($_POST['upload'])){
               echo "<br>"."Deine datei hat: ".$fileSize_mb."MB";
             }
         }else {
-            echo "Probleme beim uploaden";
+            header("location: ../fileUpload.php?upload=wrongtype");
         }
     }else {
         header("location: ../fileUpload.php?upload=wrongtype");

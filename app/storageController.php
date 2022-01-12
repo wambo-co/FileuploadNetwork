@@ -35,8 +35,14 @@ class storageController
         $this->mysqlConnection = $mysqlConnection;
     }
 
-    public function getUserFreeSpace() // Freier Speicher der dem user zur verfügung steht
+    public function isSpaceEnough() //:bool
     {
+        /*TODO:
+        Wenn aktuller Speicher + neuer Speicherdatei > getUserFullSpace
+            Dann return false;
+        Sonst
+            return true
+        */
 
     }
 
