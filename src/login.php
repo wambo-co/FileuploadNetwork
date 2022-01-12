@@ -1,6 +1,6 @@
 <?php
-require_once ('../vendor/autoload.php');
-require_once ('../sqlconnect.php');
+require_once('../vendor/autoload.php');
+require_once('../sqlconnect.php');
 use app\login;
 
 if(((new login($_POST['username'], $_POST['password'], $mysqli))->login())){

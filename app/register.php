@@ -27,7 +27,7 @@ class register
     {
 
         $createHashPassword = password_hash($this->password, PASSWORD_DEFAULT);
-        $cmd = "INSERT INTO `useraccounts` (`ID`, `username`, `password`, `email`, `userpicture`, `userstatus`, `usergroup`) VALUES (NULL, '$this->name', '$createHashPassword', '$this->email', '-', '-', '-' ); ";
+        $cmd = "INSERT INTO `useraccounts` (`ID`, `username`, `password`, `email`, `userpicture`, `userstatus`, `usergroup`, `storageSpace`) VALUES (NULL, '$this->name', '$createHashPassword', '$this->email', '-', '-', '-' , '0'); ";
         $this->mysqlconnection->query($cmd);
         // INSERT INTO `userfiles` (`username`, `files`, `groups`, `extra`) VALUES ('$this->name', '-', '-', '-')";
     }

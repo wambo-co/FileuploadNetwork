@@ -1,12 +1,16 @@
 <?php
 session_start();
-require_once ('../vendor/autoload.php');
-require_once ('../sqlconnect.php');
+require_once('../vendor/autoload.php');
+require_once('../sqlconnect.php');
 use app\upload;
 use app\userInformation;
 use app\getUserData;
+use app\storageController;
+use app\convertUnit;
+
 
 $username = $_SESSION['username'];
+
 
 $userLoggedIn = new userInformation($_SESSION['username'], $mysqli);
 $userId = $userLoggedIn->getUserId();
@@ -15,10 +19,14 @@ $userFiles = (new getUserData($userId, $mysqli));
 $userdata = $userFiles->getData();
 $userdataid = $userFiles->getDataId();
 $dataLocation = $userFiles->getDataLocation();
+$dataUploadTime = $userFiles->getDataUploadTime();
+$dataSize = $userFiles->getDataSize();
+
+
 ?>
 <html>
 <head>
-    <?php include ('../elements/header.php'); ?>
+    <?php include('../elements/header.php'); ?>
     <title>Private Space</title>
 </head>
 <body>
@@ -80,14 +88,19 @@ $dataLocation = $userFiles->getDataLocation();
             <div class="box data-box">
                 <?php
                 for($i = 0; $i < count($userdata); $i++){
-                    sleep(0.5);
+                    $fileConverter = new convertUnit($dataSize[$i]);
+                    $newDataSize = $fileConverter->convertToMb();
                     echo "
-                    <div class='mb-2 data-box-item'>
+                        <div class='mb-2 data-box-item'>
+                        <div>
                         <span>". $userdata[$i]. "</span> 
-                        <span>
+                        </div>
+                        <div>
+                        <span>". $newDataSize." MB</span>   
                         <a class='ml-1' href='fileUploadService/$dataLocation[$i]'><i class='bi bi-folder2-open'></i></a>
                         <a class='ml-1' href='fileUploadService/$dataLocation[$i]'download>"."<i class='bi bi-cloud-download-fill'></i></a>
-                        <a class='ml-1' href='fileUploadService/fileDelete.php?delete=$userdataid[$i]'><i class='bi bi-file-earmark-x-fill'></i></a>
+                        <a class='ml-1' href='fileUploadService/fileDelete.php?delete=$userdataid[$i]&fileSize=$dataSize[$i]'><i class='bi bi-file-earmark-x-fill'></i></a>
+                        </div>
                         </span>
                     </div>";
 

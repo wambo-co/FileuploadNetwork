@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once ("../../sqlconnect.php");
-require_once ("../../vendor/autoload.php");
+require_once ('../../vendor/autoload.php');
+require_once ('../../sqlconnect.php');
 use app\storageController;
 
 
@@ -14,9 +14,9 @@ if(isset($_POST['upload'])){
     $fileType = $_FILES['file']['type'];
     $fileExt = explode('.', $fileName);
     $allowed = array('jpg', 'pdf', 'png', 'json', 'php');
-    $allowedFileSize = 15000;
+    $allowedFileSize = 15000; // aus der Datenbank entnehmen
     $allowedFileSize_mb = $allowedFileSize/1000;
-    $fileSize_mb = $fileSize/1000000;
+    $fileSize_mb = $fileSize/1000000; //1000024
     $uploadTime = date("F j, Y, g:i a");
 
     if(in_array($fileExt[1], $allowed)){
@@ -25,8 +25,9 @@ if(isset($_POST['upload'])){
                 $new_file_name = uniqid('', true).".".$fileExt[1];
                 $fileDestination = "uploads/$new_file_name";
                 move_uploaded_file($fileTMP, $fileDestination);
-                $addSize = new storageController($_SESSION['username'], $fileSize, "", $mysqli);
-                $addSize->increaseUserStorageAmount();
+                // SQL
+                $addFileSize = new storageController($_SESSION['username'], $fileSize, "", $mysqli);
+                $addFileSize->increaseUserStorageAmount();
                 header("location: ../fileUpload.php?upload=success&fileSize=$fileSize&fileName=$fileName&fileDestination=$fileDestination&uploadTime=$uploadTime");
             }else{
                 header("location: ../fileUpload.php?upload=errorsize");

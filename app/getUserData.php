@@ -57,4 +57,29 @@ class getUserData extends upload
         return count($result);
     }
 
+    public function getDataSize()
+    {
+        $command = "SELECT * FROM `userfiles` WHERE `userid` = $this->userid";
+        $res = mysqli_query($this->mysqlConnection, $command);
+        $result =  mysqli_fetch_all($res);
+        $calledData = [];
+        for($i=0; $i < count($result); $i++){
+            $calledData[] = $result[$i][3];
+        }
+        return $calledData;
+    }
+
+    public function getDataUploadTime()
+    {
+        $command = "SELECT * FROM `userfiles` WHERE `userid` = $this->userid";
+        $res = mysqli_query($this->mysqlConnection, $command);
+        $result =  mysqli_fetch_all($res);
+        $calledData = [];
+        for($i=0; $i < count($result); $i++){
+            $calledData[] = $result[$i][5];
+        }
+        return $calledData;
+    }
+
+
 }

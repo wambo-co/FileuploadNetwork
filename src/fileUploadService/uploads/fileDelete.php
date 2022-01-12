@@ -7,8 +7,6 @@ use app\deleteUserData;
 use app\storageController;
 
 $dataId = $_GET['delete'];
-$fileSize = $_GET['fileSize'];
-
 
 $query = "SELECT `filelocation` FROM `userfiles` WHERE `id` = $dataId;";
 $res = mysqli_query($mysqli, $query);
@@ -21,9 +19,12 @@ unlink($deleteLocation);
 $deleteFile = new deleteUserData($_GET['delete'], $mysqli);
 $deleteFile->delete();
 
+//TODO: filesize bekommen und die dann löschen d.h. aus der file die ausgewählt ist die Filesize
 
-$reduceSpace = new storageController($_SESSION['username'], "", $fileSize, $mysqli);
-$reduceSpace->reduceUserStorageAmount();
+//$deleteFileSize = new storageController($_SESSION['username'], "", $deleteFileSize,)
+// php lernen - habs geschafft das man dateien hochladen kann und der speiche
+
+
 
 
 header("Location: ../fileUpload.php?delete=success");
