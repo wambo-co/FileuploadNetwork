@@ -35,27 +35,8 @@ class RegisterBody
 
     public function generateBody() : string
     {
-
-        $bodyGeneratedHtml = "<div class='is-vcentered has-text-centered'><div class='notification is-warning notification-box'><b>";
-        if(isset($_POST['submit'])){
-            $userInformation = new userInformation($_POST['username'], $this->mysqlConnection);
-            if($userInformation->isUserAviable()){
-                $regist = new register($_POST['username'], $_POST['password'], $_POST['email'], $this->mysqlConnection);
-                $regist->newUser();
-                header("Location: index.php?loginStatus=newuser");
-                //davor stand login.php
-            }else{
-                header("Location: index.php?registrationStatus=userAlreadyAssigned");
-                //davor stand userRegistration.php
-            }
-        }
-        if(isset($_GET['registrationStatus'])){
-            if($_GET['registrationStatus'] == "userAlreadyAssigned"){
-                $bodyGeneratedHtml .= "Diesen Benutzer gibt es bereits. Bitte wähle einen anderen Namen aus!";
-            }
-        }
-        $bodyGeneratedHtml .= "</b></div></div>
-        <form action='userRegistration.php' method='post' class='box form-box'>
+        $bodyGeneratedHtml =  "<form action='' method='post' class='box form-box'>";
+        $bodyGeneratedHtml .= "
             <div class='field'>
                 <label class='label'>$this->usernameLabel<input class='input is-small' type='text' name='username' placeholder='$this->usernamePlaceholder'></label>
             </div>
@@ -66,7 +47,7 @@ class RegisterBody
                 <label class='label'>$this->emailLabel<input class='input is-small' type='text' name='email' placeholder='$this->emailPlaceholder'></label>
             </div>
             <div class='field'>
-                <button class='button is-dark' type='submit' name='submit'>$this->registerButtonText</button>
+                <button class='button is-dark' type='submit' name='register'>$this->registerButtonText</button>
                 <br>
                 <b><u><a href='index.php?login' class='has-text-dark is-size-7'>$this->accountExistLinkText</a></u><b>
             </div>

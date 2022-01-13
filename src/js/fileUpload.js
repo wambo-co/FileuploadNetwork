@@ -14,15 +14,15 @@ $db_user = 'root';
 $db_password = 'root';
 $db_db = 'uploadyourdata';
 
-$connection = new MysqlConnection($db_host, $db_user,$db_password,$db_db);//
+$connection = new MysqlConnection($db_host, $db_user,$db_password,$db_db);
 
 $username = $_SESSION['username'];
 
 
-$userLoggedIn = new userInformation($_SESSION['username'], $connection->getMysqli());//
+$userLoggedIn = new userInformation($_SESSION['username'], $connection->getMysqli());
 $userId = $userLoggedIn->getUserId();
 
-$userFiles = new getUserData($userId, $mysqli);//
+$userFiles = new getUserData($userId, $mysqli);
 $userdata = $userFiles->getData();
 $userdataid = $userFiles->getDataId();
 $dataLocation = $userFiles->getDataLocation();

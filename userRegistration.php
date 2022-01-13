@@ -14,7 +14,7 @@ use app\userInformation;
     <div class="is-vcentered has-text-centered">
         <div class="notification is-warning notification-box"><b>
                 <?php
-                if(isset($_POST['submit'])){
+                if(isset($_POST['register'])){
                     $userInformation = new userInformation($_POST['username'], $mysqli);
                     if($userInformation->isUserAviable()){
                         $regist = new register($_POST['username'], $_POST['password'], $_POST['email'], $mysqli);
