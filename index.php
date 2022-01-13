@@ -1,12 +1,7 @@
 <?php
 session_start();
-////TESTING////
-$_SESSION['username'] = "123";
-$_SESSION['password'] = "123";
-
-
-////////////
-
+// idee php , eine Xml datei erstellen mit der die gesamte seite generiert wird
+// alle seiten in das array packen
 
 require_once ('vendor/autoload.php');
 use fileUploadNetwork\{Login, Register, UserInformation, UserInformationInterface, ConvertUnit,
@@ -44,9 +39,10 @@ $registerSiteBody = new RegisterBody(
 );
 // User Personal Site generieren //
 $userSiteBody = new UserBody(
-        $db_connection
+        $db_connection,
 );
 $view = new ViewController($db_connection, $loginSiteBody, $registerSiteBody, $userSiteBody);
+$view->isLoggedIn();
 ?>
 <html lang="de">
 <head>
@@ -55,7 +51,8 @@ $view = new ViewController($db_connection, $loginSiteBody, $registerSiteBody, $u
 <body>
     <!--<div class="is-vcentered has-text-centered">
         <div class="notification is-warning notification-box"> <b>-->
-           <?php echo $view->route(); ?>
+           <?php
+           echo $view->route(); ?>
        <!-- </b></div>
     </div>-->
 </body>

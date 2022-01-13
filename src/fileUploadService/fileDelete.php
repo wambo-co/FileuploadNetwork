@@ -6,8 +6,6 @@ require_once('../../sqlconnect.php');
 use app\deleteUserData;
 use app\storageController;
 
-$dataId = $_GET['delete'];
-$fileSize = $_GET['fileSize'];
 
 
 $query = "SELECT `filelocation` FROM `userfiles` WHERE `id` = $dataId;";

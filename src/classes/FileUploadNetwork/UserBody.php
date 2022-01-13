@@ -1,74 +1,107 @@
 <?php
 
 namespace fileUploadNetwork;
+use fileUploadNetwork\FileService;
+
 
 class UserBody
 {
     public $mysqlConnection;
-    public $username;
-    public UserInformation $userInformation;
-    public GetUserData $getUserData;
-
 
     public function __construct($mysqlConnection)
     {
      $this->mysqlConnection = $mysqlConnection;
     }
 
-    public function generateBody() : string
+    public function routingInsideUserSite()
     {
-        if($_SESSION['username'] == NULL){
-            session_destroy();
+        if(isset($_GET['delete'])){
+            $fileId = $_GET['delete'];
+            $fileSize = $_GET['fileSize'];
+            $fileService = new FileService($this->mysqlConnection, $fileId, $fileSize);
+            $fileService->deleteFile();
+        }else if(isset($_POST['upload'])){
+
         }
+    }
+
+    public function generateBody()
+    {
+        $this->routingInsideUserSite();
+
+        $userLoggedIn = new userInformation($_SESSION['username'], $this->mysqlConnection);
+        $userId = $userLoggedIn->getUserId();
+        var_dump($userId);
+        $userFiles = new getUserData($userId, $this->mysqlConnection);
+        $userdata = $userFiles->getData();
+        $userdataid = $userFiles->getDataId();
+        $dataLocation = $userFiles->getDataLocation();
+        $dataUploadTime = $userFiles->getDataUploadTime();
+        $dataSize = $userFiles->getDataSize();
+
+        // Generate Html Code
         $bodyGeneratedHtml = " 
         <div class='box'>
-        <div class='is-vcentered has-text-centered '>
-        <div class='notification is-warning notification-box'><b>
-        <form action='index.php' method='post'>
-        <button name='submit' type='submit'>Logout</button>
-        </form>
+                <div class='is-vcentered has-text-centered '>
+                    <div class='notification is-warning notification-box'>
+                        <b><a href='index.php?logout=true'><button type='submit'>logout</button></a></b>
+                </div>
+                
+            </div>
+        </div>       
         ";
+        $bodyGeneratedHtml .="
+        <form action='index.php' method='post' enctype='multipart/form-data'>
+            <input type='file' name='file' class='form-control-file'>
+            <button type='submit' name='upload' class='button is-small is-light'>Hochladen</button>
+            <button class='button is-small ' onclick='window.open('userInfo.php')'><i class='bi bi-person-fill'></i></button>
+            <button  name='submit' class='button is-small' onclick='window.open('../login.php?loginStatus=logout')'><i class='bi bi-box-arrow-right'></i></button>
+        </form>
+        </div>
+        <p>Meine Daten</p>
+        
+        
+        <div class='box data-box'>";
+                   for($i = 0; $i < count($userdata); $i++){
+                    $fileConverter = new convertUnit($dataSize[$i]);
+                    $newDataSize = $fileConverter->convertToMb();
+                    $bodyGeneratedHtml .= "
+                    <div class='mb-2 data-box-item'>
+                        <div>
+                            <span>". $userdata[$i]. "</span> 
+                        </div>
+                        <div>
+                            <span>". $newDataSize." MB</span>   
+                            <a class='ml-1' href='uploads/$dataLocation[$i]'><i class='bi bi-folder2-open'></i></a>
+                            <a class='ml-1' href='uploads/$dataLocation[$i]'download>"."<i class='bi bi-cloud-download-fill'></i></a>
+                            <a class='ml-1' href='index.php?delete=$userdataid[$i]&fileSize=$dataSize[$i]'><i class='bi bi-file-earmark-x-fill'></i></a>
+                        </div>              
+                    </div>";
+                    }
         return $bodyGeneratedHtml;
     }
 
-
-
-    public function handleRequestRichtig() : string
+    public function showUserFiles()
     {
-        if($_SESSION['username'] == NULL){
-            session_destroy();
+        $generateUserFilesHtml = "<div class='box data-box'>";
+
+        for($i = 0; $i < count($userdata); $i++){
+            $fileConverter = new convertUnit($dataSize[$i]);
+            $newDataSize = $fileConverter->convertToMb();
+            $bodyGeneratedHtml .= "
+                    <div class='mb-2 data-box-item'>
+                        <div>
+                            <span>". $userdata[$i]. "</span> 
+                        </div>
+                        <div>
+                            <span>". $newDataSize." MB</span>   
+                            <a class='ml-1' href='uploads/$dataLocation[$i]'><i class='bi bi-folder2-open'></i></a>
+                            <a class='ml-1' href='uploads/$dataLocation[$i]'download>"."<i class='bi bi-cloud-download-fill'></i></a>
+                            <a class='ml-1' href='index.php?delete=$userdataid[$i]&fileSize=$dataSize[$i]'><i class='bi bi-file-earmark-x-fill'></i></a>
+                        </div>              
+                    </div>";
         }
-        if(isset($_POST['submit'])){
-            session_destroy();
-        }
-        if(isset($_GET['delete'])){
 
-            echo "<br>Datei wurde erfolgreich gelöscht<br>";
-        }
-        if(isset($_GET['upload'])){
 
-            if($_GET['upload'] == "success"){
-                $fileName = $_GET['fileName'];
-                $fileSize = $_GET['fileSize'];
-                $fileDestination = $_GET['fileDestination'];
-                $fileUploadTime = $_GET['uploadTime'];
-
-                echo $fileDestination." Destination<br>";
-                echo $fileUploadTime." hochladedatum<br>";
-                echo "Datei erfolgreich hochgeladen!";
-                (new upload($userId, $fileName, $fileSize, $fileDestination, $fileUploadTime, $mysqli))->upload();
-                header("Location: fileUpload.php");
-
-            }else if($_GET['upload'] == "errorsize"){
-
-                echo "Datei ist zu groß!";
-
-            }else if($_GET['upload'] == "wrongtype"){
-
-                echo "Falsche Datentyp!";
-
-            }
-        }
     }
-
 }

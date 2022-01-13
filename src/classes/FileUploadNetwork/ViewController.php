@@ -17,10 +17,22 @@ class ViewController
         $this->registerSiteBody = $registerSiteBody;
         $this->userSiteBody = $userSiteBody;
     }
+    public function isLoggedIn()
+    {
+        if(isset($_GET['logout'])) {
+           session_destroy();
+           $this->route();
+        }
+    }
+
+    public function isAuthenticated() :bool
+    {
+        return isset($_SESSION['username']);
+    }
 
     public function route(): string
     {
-       if($_SESSION['username']){
+       if($this->isAuthenticated()){
            return $this->loadUserBody();
        }else if(isset($_GET['register'])){
             return $this->loadRegisterBody();

@@ -1,0 +1,7 @@
+- layout login register passt nicht ist verschoben
+- layout userspace ist verschoben passt nicht
+- login button man loggt sich nicht direkt aus sondern muss refreshen
+- button einloggen manchmal kommt noch kein account statt einloggen
+- url fehler wenn man sich ausgeloggt hat und wieder einloggt
+- alle echos aus den klassen entfernen
+- reduce space funktioniert noch nicht
