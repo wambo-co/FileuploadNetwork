@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<main>
+    <header name="Header">
+        <name>FileUploadNetwork</name>
+        <css>node_modules/bulma/css/bulma.css</css>
+        <css>node_modules/bootstrap-icons-font/dist/bootstrap-icons-font.css</css>
+        <css>src/css/main.css</css>
+    </header>
+    <loginpage name="LoginPage">
+        <username>Benutzername: </username>
+        <password>Passwort: </password>
+        <loginBtn>Einloggen</loginBtn>
+        <qText>Noch keinen Account? Jetzt registrieren!</qText>
+    </loginpage>
+    <regpage name="RegisterPage">
+        <username>Username: </username>
+        <password>Password: </password>
+        <email>Email: </email>
+        <register>Registrieren</register>
+        <alreadyRegister>Bereits registriert? Jetzt einloggen!</alreadyRegister>
+        <yourUsername>Dein Benutzername: </yourUsername>
+        <yourPassword>Dein Passwort:</yourPassword>
+        <yourEmail>Deine Email:</yourEmail>
+    </regpage>
+    <fileServiceSettings name="FileServiceSettings">
+        <allow>jpg</allow>
+        <allow>png</allow>
+        <allow>java</allow>
+        <allowSizePerFile></allowSizePerFile>
+        <uploadLocation></uploadLocation>
+        <fileToBig></fileToBig>
+        <wrongFileTyp></wrongFileTyp>
+        <successfullyUploaded></successfullyUploaded>
+    </fileServiceSettings>
+</main>
+

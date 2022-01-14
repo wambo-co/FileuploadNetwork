@@ -1,60 +1,33 @@
 <?php
 session_start();
-// idee php, eine Xml datei erstellen mit der die gesamte seite generiert wird
-// alle seiten in das array packen
-
 require_once ('vendor/autoload.php');
-use fileUploadNetwork\{Login, Register, UserInformation, UserInformationInterface, ConvertUnit,
-    StorageController, Upload, DeleteUserData, GetUserData, MysqlConnection, Header, LoginBody, RegisterBody,
-    UserBody, ViewController};
+use fileUploadNetwork\{Header, LoginBody, RegisterBody, UserBody, ViewController, ReadXML};
 
 // Datenbank Verbindung
 $db_db = 'uploadyourdata';
 $db_connection = new mysqli("localhost", "root","root",$db_db);
 
-// Header generieren //
-$header = new Header("test",[
-    "node_modules/bulma/css/bulma.css",
-    "node_modules/bootstrap-icons-font/dist/bootstrap-icons-font.css",
-    "src/css/main.css",
-]);
-// Login seite generieren //
-$loginSiteBody = new LoginBody(
-    "Benutzername: ",
-    "Passwort: ",
-    "Einloggen",
-    "Noch keinen Account? Jetzt registrieren!"
-);
-// Registrierungsseite generieren //
-$registerSiteBody = new RegisterBody(
-        $db_connection,
-        "Username:",
-    "Password:",
-    "Email",
-    "Registrieren",
-    "Bereits registriert? Jetzt einloggen",
-    "Dein Benutzername",
-    "Dein Passwort",
-    "Deine Email"
-);
-// User Personal Site generieren //
-$userSiteBody = new UserBody(
-        $db_connection,$loginSiteBody
-);
+// XML convertieren
+$xml = new ReadXML('config.xml');
+$xml = $xml->getArray();
+
+// Seiten erstellen aus XML
+$header = new Header($xml['header']['name'], $xml['header']['css']);
+
+$loginSiteBody = new LoginBody($xml['loginpage']['username'], $xml['loginpage']['password'],
+$xml['loginpage']['loginBtn'], $xml['loginpage']['qText']);
+
+$registerSiteBody = new RegisterBody($db_connection, $xml['regpage']['username'], $xml['regpage']['password'],
+$xml['regpage']['email'], $xml['regpage']['register'], $xml['regpage']['alreadyRegister'],
+$xml['regpage']['yourUsername'], $xml['regpage']['yourPassword'],$xml['regpage']['yourEmail']);
+
+$userSiteBody = new UserBody($db_connection,$loginSiteBody);
+
 $view = new ViewController($db_connection, $loginSiteBody, $registerSiteBody, $userSiteBody);
 $view->isLoggedIn();
 ?>
 <html lang="de">
-<head>
-    <?=$header->generateHeader(); ?>
-</head>
-<body>
-    <!--<div class="is-vcentered has-text-centered">
-        <div class="notification is-warning notification-box"> <b>-->
-           <?php
-           echo $view->route(); ?>
-       <!-- </b></div>
-    </div>-->
-</body>
+<head><?=$header->generateHeader(); ?></head>
+<body><?=$view->route(); ?></body>
 </html>
 

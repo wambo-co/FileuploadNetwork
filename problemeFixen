@@ -9,5 +9,10 @@
 
 
 
-animation wenn man sich einloggt 3d drehen und das andere kommt 3d zurück
-- wenn man datei ausgewählt hat direkt hochladen
+
+
+login button press -> klasse hinzufügen zur login-form animation drehen 180grad
+usersite load -> animation 180grad nach der login press animation
+vorerst body animation ganz rausnehmen
+
+nur anim wenn auch eingeloggt

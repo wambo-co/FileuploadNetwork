@@ -31,6 +31,7 @@ class UserBody
 
         }else if(isset($_POST['upload'])){
             $userId = $this->getUserId();
+
             $fileService = new UploadUserFile(
                 $_FILES['file'],
                 [
