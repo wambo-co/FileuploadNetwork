@@ -1,6 +1,6 @@
 <?php
 
-namespace fileUploadNetwork;
+namespace loginpage;
 
 class Login
 {
