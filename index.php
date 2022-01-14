@@ -1,6 +1,6 @@
 <?php
 session_start();
-// idee php , eine Xml datei erstellen mit der die gesamte seite generiert wird
+// idee php, eine Xml datei erstellen mit der die gesamte seite generiert wird
 // alle seiten in das array packen
 
 require_once ('vendor/autoload.php');
@@ -39,7 +39,7 @@ $registerSiteBody = new RegisterBody(
 );
 // User Personal Site generieren //
 $userSiteBody = new UserBody(
-        $db_connection,
+        $db_connection,$loginSiteBody
 );
 $view = new ViewController($db_connection, $loginSiteBody, $registerSiteBody, $userSiteBody);
 $view->isLoggedIn();

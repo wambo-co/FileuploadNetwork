@@ -23,7 +23,7 @@ class Upload
         $this->mysqlconnection = $mysqlconnection;
     }
 
-    public function upload()
+    public function addToDatabase()
     {
         $command = "INSERT INTO `userfiles` (`id`, `userid`, `filename`, `filesize`, `filelocation`, `date`) VALUES (NULL, '$this->userid', '$this->file','$this->fileSize','$this->fileLocation', '$this->date');";
         return $this->mysqlconnection->query($command);

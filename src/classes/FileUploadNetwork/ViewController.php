@@ -19,10 +19,11 @@ class ViewController
     }
     public function isLoggedIn()
     {
-        if(isset($_GET['logout'])) {
+       /* if(isset($_GET['logout'])) {
            session_destroy();
            $this->route();
         }
+       */
     }
 
     public function isAuthenticated() :bool
@@ -45,11 +46,11 @@ class ViewController
 
     public function loadLoginBody()
     {
-        if($_POST['login'] == "wrongdata"){
+        if(isset($_POST['login']) && $_POST['login'] == "wrongdata"){
             echo "Falsche Daten wurden eingegeben!";
-        }else if($_POST['login'] == "newuser"){
+        }else if(isset($_POST['login']) && $_POST['login'] == "newuser"){
             echo "Benutzer wurde erstellt!";
-        }else if($_POST['login'] == "sessionExpired"){
+        }else if(isset($_POST['login']) && $_POST['login'] == "sessionExpired"){
             echo "Sitzung abgelaufen!";
         }
         return $this->loginSiteBody->generateBody();
@@ -90,7 +91,7 @@ class ViewController
             $_POST['login'] = "sessionExpired";
             return $this->loadLoginBody();
         }
-        return $this->userSiteBody->generateBody();
+        return $this->userSiteBody->routingInsideUserSite();
     }
 
 

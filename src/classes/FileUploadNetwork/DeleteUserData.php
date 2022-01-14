@@ -3,15 +3,26 @@
 namespace fileUploadNetwork;
 use fileUploadNetwork\StorageController;
 
-class DeleteUserData extends FileService
+class DeleteUserData
 {
+
+    protected $mysqlConnection;
+    protected int $fileId;
+    protected int $fileSize;
+
+    public function __construct($mysqlConnection, $fileId, $fileSize)
+    {
+        $this->mysqlConnection = $mysqlConnection;
+        $this->fileId = $fileId;
+        $this->fileSize = $fileSize;
+    }
 
     public function deleteFileOnServerSpace()
     {
         $query = "SELECT `filelocation` FROM `userfiles` WHERE `id` = $this->fileId;";
         $res = mysqli_query($this->mysqlConnection, $query);
         $check = mysqli_fetch_array($res);
-        $deleteLocation = "uploads/".$check[0];
+        $deleteLocation = "$check[0]";
         unlink($deleteLocation);
         $this->deleteFileFromDatabase();
         //$this->reduceSpace();
