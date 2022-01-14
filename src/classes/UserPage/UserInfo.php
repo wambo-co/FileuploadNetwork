@@ -1,9 +1,9 @@
 <?php
 
-namespace fileUploadNetwork;
-use fileUploadNetwork\UserInformation;
-use fileUploadNetwork\ConvertUnit;
-use fileUploadNetwork\StorageController;
+namespace UserPage;
+use Converter\ConvertUnit;
+use Controller\StorageController;
+use Userpage\UserInformation;
 
 class UserInfo
 {

@@ -1,13 +1,23 @@
 <?php
 session_start();
 require_once ('vendor/autoload.php');
-use fileUploadNetwork\{Header, LoginBody, RegisterBody, UserBody, ViewController, ReadXML};
+use Main\Header;
+use Main\LoginBody;
+use Registerpage\RegisterBody;
+use Userpage\UserBody;
+use Controller\ViewController;
+use Converter\ReadXML;
+
+$_SESSION['username'] = "123";
+$_SESSION['password'] = "123";
+
 
 // Datenbank Verbindung
 $db_db = 'uploadyourdata';
 $db_connection = new mysqli("localhost", "root","root",$db_db);
 
-// Select Language //
+// Select Language ///
+/*
 if($_GET['language'] == "russian"){
     $xml = new ReadXML('src/xml_languages/russian_language.xml');
     setcookie("language", "russian");
@@ -24,19 +34,25 @@ if($_GET['language'] == "russian"){
         $xml = new ReadXML("src/xml_languages/chinesisch_language.xml");
     }else if($_COOKIE['language'] == "russian"){
         $xml = new ReadXML("src/xml_languages/russian_language.xml");
+    }else {
+        $xml = new ReadXML("src/xml_languages/german_language.xml");
     }
 }
+
+*/
+$xml = new ReadXML("src/xml_languages/german_language.xml");
 $xml = $xml->getArray();
 
 // Seiten erstellen aus XML
 $header = new Header($xml['header']['name'], $xml['header']['css'], $xml['header']['js']);
 
-$loginSiteBody = new LoginBody($xml['loginpage']['username'], $xml['loginpage']['password'],
-$xml['loginpage']['loginBtn'], $xml['loginpage']['qText']);
 
 $registerSiteBody = new RegisterBody($db_connection, $xml['regpage']['username'], $xml['regpage']['password'],
 $xml['regpage']['email'], $xml['regpage']['register'], $xml['regpage']['alreadyRegister'],
 $xml['regpage']['yourUsername'], $xml['regpage']['yourPassword'],$xml['regpage']['yourEmail']);
+
+$loginSiteBody = new LoginBody($xml['loginpage']['username'], $xml['loginpage']['password'],
+    $xml['loginpage']['loginBtn'], $xml['loginpage']['qText']);
 
 $userSiteBody = new UserBody($db_connection,$loginSiteBody);
 

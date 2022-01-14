@@ -1,5 +1,5 @@
 <?php
-namespace loginpage;
+namespace Main;
 
 class LoginBody
 {

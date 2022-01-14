@@ -1,6 +1,10 @@
 <?php
 
-namespace fileUploadNetwork;
+namespace Controller;
+use Main\LoginBody;
+use RegisterPage\RegisterBody;
+use UserPage\UserBody;
+
 
 class ViewController
 {

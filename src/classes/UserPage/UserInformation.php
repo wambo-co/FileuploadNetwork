@@ -1,6 +1,6 @@
 <?php
 
-namespace fileUploadNetwork;
+namespace UserPage;
 
 class UserInformation implements userInformationInterface
 {

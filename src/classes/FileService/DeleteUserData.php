@@ -1,7 +1,7 @@
 <?php
 
-namespace fileUploadNetwork;
-use fileUploadNetwork\StorageController;
+namespace FileService;
+use Controller\StorageController;
 
 
 class DeleteUserData

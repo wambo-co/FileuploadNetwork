@@ -1,6 +1,6 @@
 <?php
 
-namespace fileUploadNetwork;
+namespace RegisterPage;
 
 
 class Register

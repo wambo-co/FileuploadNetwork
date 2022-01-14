@@ -1,6 +1,6 @@
 <?php
 
-namespace fileUploadNetwork;
+namespace RegisterPage;
 
 
 class RegisterBody
@@ -49,7 +49,7 @@ class RegisterBody
             <div class='field'>
                 <button class='button is-dark' type='submit' name='register'>$this->registerButtonText</button>
                 <br>
-                <b><u><a href='index.php?login' class='has-text-dark is-size-7'>$this->accountExistLinkText</a></u><b>
+                <b><u><a href='../../../index.php?login' class='has-text-dark is-size-7'>$this->accountExistLinkText</a></u><b>
             </div>
         </form>";
 

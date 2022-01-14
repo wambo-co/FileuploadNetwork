@@ -1,5 +1,5 @@
 <?php
-namespace fileUploadNetwork;
+namespace Main;
 
 class Header
 {

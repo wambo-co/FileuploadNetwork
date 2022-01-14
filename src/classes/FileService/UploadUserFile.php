@@ -1,7 +1,7 @@
 <?php
 
-namespace fileUploadNetwork;
-use fileUploadNetwork\Upload;
+namespace FileService;
+use FileService\Upload;
 
 class UploadUserFile
 {

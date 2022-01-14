@@ -1,6 +1,6 @@
 <?php
 
-namespace loginpage;
+namespace Main;
 
 class Login
 {

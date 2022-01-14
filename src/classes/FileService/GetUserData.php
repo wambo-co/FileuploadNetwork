@@ -1,6 +1,6 @@
 <?php
 
-namespace fileUploadNetwork;
+namespace FileService;
 
 class GetUserData extends upload
 {

@@ -1,11 +1,15 @@
 <?php
 
-namespace fileUploadNetwork;
-use fileUploadNetwork\DeleteUserData;
-use fileUploadNetwork\UploadUserFile;
-use fileUploadNetwork\ViewController;
-use fileUploadNetwork\StorageController;
-use fileUploadNetwork\ConvertUnit;
+namespace UserPage;
+use FileService\DeleteUserData;
+use FileService\UploadUserFile;
+use Controller\ViewController;
+use Controller\StorageController;
+use Converter\ConvertUnit;
+use Main\LoginBody;
+use FileService\GetUserData;
+use UserPage\UserInformation;
+
 
 
 class UserBody
@@ -61,7 +65,7 @@ class UserBody
 
     public function getUserId()
     {
-        $userLoggedIn = new userInformation($_SESSION['username'], $this->mysqlConnection);
+        $userLoggedIn = new UserInformation($_SESSION['username'], $this->mysqlConnection);
         $userId = $userLoggedIn->getUserId();
         return $userId;
     }
@@ -88,9 +92,9 @@ class UserBody
         $userUsedStoragePercent = $loadUserStorage->getUserUsedSpaceInPercent($userStorageSpace,$userUsedStorageSpace);
 
 
-        $bodyGeneratedHtml ="
+        $bodyGeneratedHtml = "
         <div class='user-UI'>
-        <form action='index.php' method='post' enctype='multipart/form-data'>
+        <form action='../../../index.php' method='post' enctype='multipart/form-data'>
             <input type='file' name='file' class='form-control-file'>
             <button type='submit' name='upload' class='button is-small is-light'>Hochladen</button>
             <button class='button is-small ' onclick='window.open('userInfo.php')'><i class='bi bi-person-fill'></i></button>
