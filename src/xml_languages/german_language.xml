@@ -29,6 +29,7 @@
         <allow>jpg</allow>
         <allow>png</allow>
         <allow>java</allow>
+        <allow>dmg</allow>
         <allowSizePerFile></allowSizePerFile>
         <uploadLocation></uploadLocation>
         <fileToBig></fileToBig>

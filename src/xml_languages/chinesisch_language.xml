@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<main>
+    <header name="Header">
+        <name>FileUploadNetwork</name>
+        <css>node_modules/bulma/css/bulma.css</css>
+        <css>node_modules/bootstrap-icons-font/dist/bootstrap-icons-font.css</css>
+        <css>node_modules/flag-icon-css/css/flag-icons.css</css>
+        <css>src/css/main.css</css>
+        <js>src/js/test.js</js>
+        <js>src/js/test.js</js>
+    </header>
+    <loginpage name="LoginPage">
+        <username>用户名 : </username>
+        <password>密码。: </password>
+        <loginBtn>登录</loginBtn>
+        <qText>没有账户？现在就注册吧!</qText>
+    </loginpage>
+    <regpage name="RegisterPage">
+        <username>用户名: </username>
+        <password>密码: </password>
+        <email>电子邮件: </email>
+        <register>注册吧</register>
+        <alreadyRegister>已经注册过了？请立即登录！</alreadyRegister>
+        <yourUsername>你的用户名: </yourUsername>
+        <yourPassword>您的密码:</yourPassword>
+        <yourEmail>您的电子邮件:</yourEmail>
+    </regpage>
+    <fileServiceSettings name="FileServiceSettings">
+        <allow>jpg</allow>
+        <allow>png</allow>
+        <allow>java</allow>
+        <allowSizePerFile></allowSizePerFile>
+        <uploadLocation></uploadLocation>
+        <fileToBig></fileToBig>
+        <wrongFileTyp></wrongFileTyp>
+        <successfullyUploaded></successfullyUploaded>
+    </fileServiceSettings>
+</main>
+

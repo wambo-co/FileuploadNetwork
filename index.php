@@ -14,13 +14,17 @@ if($_GET['language'] == "russian"){
 }else if($_GET['language'] == "german"){
     $xml = new ReadXML('src/xml_languages/german_language.xml');
     setcookie("language", "german");
+}else if($_GET['language'] == "china"){
+    $xml = new ReadXML('src/xml_languages/chinesisch_language.xml');
+    setcookie("language", "china");
 }else{
     if($_COOKIE['language'] == "german"){
         $xml = new ReadXML("src/xml_languages/german_language.xml");
-    }else{
+    }else if($_COOKIE['language'] == "china"){
+        $xml = new ReadXML("src/xml_languages/chinesisch_language.xml");
+    }else if($_COOKIE['language'] == "russian"){
         $xml = new ReadXML("src/xml_languages/russian_language.xml");
     }
-
 }
 $xml = $xml->getArray();
 
@@ -41,6 +45,8 @@ $view->isLoggedIn();
 ?>
 <html lang="de">
 <head><?=$header->generateHeader(); ?></head>
-<body><?=$view->route(); ?></body>
+<body>
+<?=$view->route(); ?>
+</body>
 </html>
 
