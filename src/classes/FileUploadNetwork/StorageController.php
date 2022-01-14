@@ -22,10 +22,10 @@ class StorageController
      */
 
 
-    protected $username; // um zu gucken wie viel Speicher der user zur verfügung hat
-    protected $newUploadFileSize; // neue Dateigröße ermitteln um diese dann abzuziehen
-    protected $deleteFileSize; // um die Datei wieder zu löschen
-    protected $mysqlConnection;
+    public $username; // um zu gucken wie viel Speicher der user zur verfügung hat
+    public  $newUploadFileSize; // neue Dateigröße ermitteln um diese dann abzuziehen
+    public  $deleteFileSize; // um die Datei wieder zu löschen
+    public  $mysqlConnection;
 
     public function __construct($username, $newUploadFileSize, $deleteFileSize, $mysqlConnection)
     {

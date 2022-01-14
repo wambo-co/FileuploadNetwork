@@ -1,22 +1,6 @@
 {
-  "name": "fileuploadnetwork",
-  "version": "1.0.0",
-  "description": "cms- every user has the ability to upload and share a file",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maximgofman/FileuploadNetwork.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/maximgofman/FileuploadNetwork/issues"
-  },
-  "homepage": "https://github.com/maximgofman/FileuploadNetwork#readme",
   "dependencies": {
+    "bootstrap-icons": "^1.7.2",
     "bootstrap-icons-font": "^2.0.7",
     "bulma": "^0.9.3"
   }

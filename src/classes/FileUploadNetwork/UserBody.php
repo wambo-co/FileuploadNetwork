@@ -4,6 +4,10 @@ namespace fileUploadNetwork;
 use fileUploadNetwork\DeleteUserData;
 use fileUploadNetwork\UploadUserFile;
 use fileUploadNetwork\ViewController;
+use fileUploadNetwork\StorageController;
+use fileUploadNetwork\ConvertUnit;
+
+
 class UserBody
 {
     public $mysqlConnection;
@@ -19,7 +23,6 @@ class UserBody
     {
         // ='index.php?delete=$userdataid[$i]&fileSize=$dataSize[$i]'><i class='bi bi-file-earma
         if(isset($_GET['delete'])){
-
             $fileId = $_GET['delete'];
             $fileSize = $_GET['fileSize'];
             $fileService = new DeleteUserData($this->mysqlConnection, $fileId, $fileSize);
@@ -33,7 +36,8 @@ class UserBody
                 [
                     "jpg",
                     "java",
-                    "pdf"
+                    "pdf",
+                    "zip"
                 ],
                 "100000000000",
                 "uploads",
@@ -43,17 +47,17 @@ class UserBody
             $userId,$this->mysqlConnection);
             $fileService->upload();
             return $this->generateBody();
-        }else if(isset($_POST['logout'])){
 
+        }else if(isset($_POST['logout'])){
             session_destroy();
             return $this->loginBody->generateBody();
 
         }else{
-
             return $this->generateBody();
 
         }
     }
+
     public function getUserId()
     {
         $userLoggedIn = new userInformation($_SESSION['username'], $this->mysqlConnection);
@@ -71,29 +75,31 @@ class UserBody
         $dataUploadTime = $userFiles->getDataUploadTime();
         $dataSize = $userFiles->getDataSize();
 
-        // Generate Html Code
-        $bodyGeneratedHtml = " 
-        <div class='box'>
-            <form action='index.php' method='post'>
-                <div class='is-vcentered has-text-centered '>
-                    <div class='notification is-warning notification-box'>
-                        <b><button type='submit' name='logout'>logout</button></a></b>
-                </div>
-            </form>
-        </div>
-        </div>       
-        ";
-        $bodyGeneratedHtml .="
+        $loadUserStorage = new storageController(
+        $_SESSION['username'],
+            0,0,
+            $this->mysqlConnection
+            );
+
+
+        $userStorageSpace = (new convertUnit($loadUserStorage->getUserFullSpace()))->convertToMb();
+        $userUsedStorageSpace =(new convertUnit($loadUserStorage->getUserActualSpaceUsage()))->convertToMb();
+        $userUsedStoragePercent = $loadUserStorage->getUserUsedSpaceInPercent($userStorageSpace,$userUsedStorageSpace);
+
+
+        $bodyGeneratedHtml ="
+        <div class='user-UI'>
         <form action='index.php' method='post' enctype='multipart/form-data'>
             <input type='file' name='file' class='form-control-file'>
             <button type='submit' name='upload' class='button is-small is-light'>Hochladen</button>
             <button class='button is-small ' onclick='window.open('userInfo.php')'><i class='bi bi-person-fill'></i></button>
-            <button  name='submit' class='button is-small' onclick='window.open('index.php?loginStatus=logout')'><i class='bi bi-box-arrow-right'></i></button>
+            <button  name='logout' class='button is-small'><i class='bi bi-box-arrow-right'></i></button>
         </form>
-        </div>
+          <progress class='progress'  value='$userUsedStoragePercent' max='100'></progress>
+                    Du hast bereits $userUsedStorageSpace MB von $userStorageSpace
+                    MB verbraucht.
+                    <br>
         <p>Meine Daten</p>
-        
-        
         <div class='box data-box'>";
                    for($i = 0; $i < count($userdata); $i++){
                     $fileConverter = new convertUnit($dataSize[$i]);
@@ -114,27 +120,4 @@ class UserBody
         return $bodyGeneratedHtml;
     }
 
-    public function showUserFiles() // Feature Später, damit die USer files jede Sekunde aktualisert werden, also die Variabeln
-    {
-
-        $generateUserFilesHtml = "<div class='box data-box'>";
-        for($i = 0; $i < count($userdata); $i++){
-            $fileConverter = new convertUnit($dataSize[$i]);
-            $newDataSize = $fileConverter->convertToMb();
-            $bodyGeneratedHtml .= "
-                    <div class='mb-2 data-box-item'>
-                        <div>
-                            <span>". $userdata[$i]. "</span> 
-                        </div>
-                        <div>
-                            <span>". $newDataSize." MB</span>   
-                            <a class='ml-1' href='uploads/$dataLocation[$i]'><i class='bi bi-folder2-open'></i></a>
-                            <a class='ml-1' href='uploads/$dataLocation[$i]'download>"."<i class='bi bi-cloud-download-fill'></i></a>
-                            <a class='ml-1' href='index.php?delete=$userdataid[$i]&fileSize=$dataSize[$i]'><i class='bi bi-file-earmark-x-fill'></i></a>
-                        </div>              
-                    </div>";
-        }
-
-
-    }
 }

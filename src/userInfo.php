@@ -22,15 +22,15 @@ $userUsedStoragePercent = $userStorage->getUserUsedSpaceInPercent($userStorageSp
 
 
 ?>
-<div class="box user-box">
-    <article class="media">
-        <div class="media-left">
-            <figure class="image is-64x64">
-                <img src="<?php echo $userPicture?>" onerror="this.onerror=null; this.src='../assets/pictures/default.webp'" alt="Image">
+<div class='box user-box'>
+    <article class='media'>
+        <div class='media-left'>
+            <figure class='image is-64x64'>
+                <img src='<?php echo $userPicture?>' onerror='this.onerror=null; this.src='../assets/pictures/default.webp'' alt='Image'>
             </figure>
         </div>
-        <div class="media-content">
-            <div class="content">
+        <div class='media-content'>
+            <div class='content'>
                 <p>
                     <strong><?php echo $username ?></strong> <small><?php echo $userEmail?></small>
                     <br>
@@ -40,7 +40,7 @@ $userUsedStoragePercent = $userStorage->getUserUsedSpaceInPercent($userStorageSp
                     <br>
                     Speicherplatz: <?php echo $userStorageSpace ?> MB
                     <br>
-                    <progress class="progress"  value="<?=$userUsedStoragePercent?>" max="100"></progress>
+                    <progress class='progress'  value='<?=$userUsedStoragePercent?>' max='100'></progress>
                     Du hast bereits <?php echo $userUsedStorageSpace ?> MB von <?php echo $userStorageSpace ?>
                     MB verbraucht.
                     <br>

@@ -3,6 +3,7 @@
 namespace fileUploadNetwork;
 use fileUploadNetwork\StorageController;
 
+
 class DeleteUserData
 {
 
@@ -24,6 +25,10 @@ class DeleteUserData
         $check = mysqli_fetch_array($res);
         $deleteLocation = "$check[0]";
         unlink($deleteLocation);
+
+        $deleteSpace = new StorageController($_SESSION['username'],"" , $this->fileSize, $this->mysqlConnection);
+        $deleteSpace->reduceUserStorageAmount();
+
         $this->deleteFileFromDatabase();
         //$this->reduceSpace();
     }

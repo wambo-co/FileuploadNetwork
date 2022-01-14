@@ -54,6 +54,8 @@ class UploadUserFile
                     //hier noch increaseStorageAmount
                     $connect = new Upload($this->userid, $fileName, $fileSize, $fileDestination, $uploadTime, $this->mysqlConnection);
                     $connect->addToDatabase();
+                    $addSpace = new StorageController($_SESSION['username'], $fileSize, "", $this->mysqlConnection);
+                    $addSpace->increaseUserStorageAmount();
                     return $this->textFileSuccessfullyUploaded;
                 }else{
                     return $this->textFileToBig;
