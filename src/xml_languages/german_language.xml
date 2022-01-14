@@ -10,20 +10,20 @@
         <js>src/js/test.js</js>
     </header>
     <loginpage name="LoginPage">
-        <username>Имя пользователя: </username>
-        <password>Пароль: </password>
-        <loginBtn>Войти</loginBtn>
-        <qText>Еще не зарегистрированы? Зарегистрируйтесь сейчас!</qText>
+        <username>Benutzername: </username>
+        <password>Passwort: </password>
+        <loginBtn>Einloggen</loginBtn>
+        <qText>Noch keinen Account? Jetzt registrieren!</qText>
     </loginpage>
     <regpage name="RegisterPage">
-        <username>Имя пользователя: </username>
-        <password>Пароль: </password>
+        <username>Benutzername: </username>
+        <password>Passwort: </password>
         <email>Email: </email>
-        <register>Регистр</register>
-        <alreadyRegister>Вы уже зарегистрированы? Войдите сейчас!</alreadyRegister>
-        <yourUsername>Ваше имя пользователя: </yourUsername>
-        <yourPassword>Ваш пароль:</yourPassword>
-        <yourEmail>Ваш электронный адрес:</yourEmail>
+        <register>Registrieren</register>
+        <alreadyRegister>Bereits registriert? Jetzt einloggen!</alreadyRegister>
+        <yourUsername>Dein Benutzername: </yourUsername>
+        <yourPassword>Dein Passwort:</yourPassword>
+        <yourEmail>Deine Email:</yourEmail>
     </regpage>
     <fileServiceSettings name="FileServiceSettings">
         <allow>jpg</allow>

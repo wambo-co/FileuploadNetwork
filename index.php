@@ -7,12 +7,25 @@ use fileUploadNetwork\{Header, LoginBody, RegisterBody, UserBody, ViewController
 $db_db = 'uploadyourdata';
 $db_connection = new mysqli("localhost", "root","root",$db_db);
 
-// XML convertieren
-$xml = new ReadXML('config.xml');
+// Select Language //
+if($_GET['language'] == "russian"){
+    $xml = new ReadXML('src/xml_languages/russian_language.xml');
+    setcookie("language", "russian");
+}else if($_GET['language'] == "german"){
+    $xml = new ReadXML('src/xml_languages/german_language.xml');
+    setcookie("language", "german");
+}else{
+    if($_COOKIE['language'] == "german"){
+        $xml = new ReadXML("src/xml_languages/german_language.xml");
+    }else{
+        $xml = new ReadXML("src/xml_languages/russian_language.xml");
+    }
+
+}
 $xml = $xml->getArray();
 
 // Seiten erstellen aus XML
-$header = new Header($xml['header']['name'], $xml['header']['css']);
+$header = new Header($xml['header']['name'], $xml['header']['css'], $xml['header']['js']);
 
 $loginSiteBody = new LoginBody($xml['loginpage']['username'], $xml['loginpage']['password'],
 $xml['loginpage']['loginBtn'], $xml['loginpage']['qText']);
