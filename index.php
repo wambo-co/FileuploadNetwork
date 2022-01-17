@@ -8,6 +8,10 @@ use LoginPage\LoginBody;
 use RegisterPage\RegisterBody;
 use UserPage\UserBody;
 
+// Test
+$_POST['username'] = "admin";
+$_POST['password'] = "1";
+
 // Datenbank Verbindung //
 $db_db = 'uploadyourdata';
 $db_connection = new mysqli("localhost", "root","root",$db_db);
@@ -30,7 +34,7 @@ $xml['regpage']['yourUsername'], $xml['regpage']['yourPassword'],$xml['regpage']
 $userSiteBody = new UserBody($db_connection,$loginSiteBody);
 
 $view = new ViewController($db_connection, $loginSiteBody, $registerSiteBody, $userSiteBody);
-$view->isLoggedIn();
+
 ?>
 <html lang="de">
 <head>

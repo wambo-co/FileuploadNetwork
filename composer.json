@@ -5,5 +5,7 @@
             "": "src/classes"
         }
     },
-    "require": {}
+    "require": {
+      "ext-mysqli": "*"
+    }
 }

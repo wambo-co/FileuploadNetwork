@@ -17,7 +17,7 @@ class LoginBody
         $this->notRegistratedLink = $notRegistratedLink;
     }
 
-    public function generateBody()
+    public function generateBody(): string
     {
         $bodyGeneratedHtml = "<form action='' method='post' class='box form-box'>";
         $bodyGeneratedHtml .= "

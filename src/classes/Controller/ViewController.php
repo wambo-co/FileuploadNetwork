@@ -59,7 +59,7 @@ class ViewController
     {
         $loginUser = new login($_POST['username'], $_POST['password'], $this->mysqlConnection);
 
-        if($loginUser->login()){
+        if($loginUser->login()){  // wenn es true ist → also user existiert und das passwort stimmt
             $_SESSION['username'] = $_POST['username'];
             return $this->route();
         }else{

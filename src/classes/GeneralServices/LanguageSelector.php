@@ -5,7 +5,7 @@ use GeneralServices\ReadXML;
 class LanguageSelector
 {
 
-    public function getLanguage(): \GeneralServices\ReadXML
+    public function getLanguage(): ReadXML
     {
         if($_GET['language'] == "russian"){
             setcookie("language", "russian");
