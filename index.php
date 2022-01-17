@@ -24,6 +24,8 @@ if($_GET['language'] == "russian"){
         $xml = new ReadXML("src/xml_languages/chinesisch_language.xml");
     }else if($_COOKIE['language'] == "russian"){
         $xml = new ReadXML("src/xml_languages/russian_language.xml");
+    }else {
+        $xml = new ReadXML("src/xml_languages/german_language.xml");
     }
 }
 $xml = $xml->getArray();
