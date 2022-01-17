@@ -48,6 +48,7 @@ class ViewController
         }
     }
 
+
     public function isAuthenticated() :bool
     {
         return isset($_SESSION['username']);

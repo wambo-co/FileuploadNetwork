@@ -30,7 +30,6 @@ class DeleteUserData
         $deleteSpace->reduceUserStorageAmount();
 
         $this->deleteFileFromDatabase();
-        //$this->reduceSpace();
     }
 
     public function deleteFileFromDatabase()
@@ -47,6 +46,3 @@ class DeleteUserData
     }
 
 }
-
-
-//DELETE FROM `userfiles` WHERE `userfiles`.`id` = 50;

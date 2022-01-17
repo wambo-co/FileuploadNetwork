@@ -12,8 +12,6 @@ class RegisterBody
     public $usernamePlaceholder;
     public $passwordPlaceholder;
     public $emailPlaceholder;
-
-
     public $registerButtonText;
     public $accountExistLinkText;
 
@@ -55,8 +53,5 @@ class RegisterBody
 
         return $bodyGeneratedHtml;
 
-
     }
-
-
 }

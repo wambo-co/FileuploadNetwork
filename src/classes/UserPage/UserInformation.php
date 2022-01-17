@@ -7,11 +7,13 @@ class UserInformation implements userInformationInterface
     protected $username;
     protected $mysqlConnection;
 
+
     public function __construct($username, $mysqlConnection)
     {
         $this->username = $username;
         $this->mysqlConnection = $mysqlConnection;
     }
+
 
     public function isUserAviable()
     {
@@ -25,6 +27,7 @@ class UserInformation implements userInformationInterface
         }
     }
 
+
     public function getUserId()
     {
         $command = "SELECT * FROM `useraccounts` WHERE `username` LIKE '$this->username';";
@@ -32,6 +35,7 @@ class UserInformation implements userInformationInterface
         $useraccountsDB = mysqli_fetch_array($res);
         return $useraccountsDB[0];
     }
+
 
     public function getUserAccountInformation()
     {

@@ -17,7 +17,7 @@ body::after
     bottom: 0;
     position: absolute;
     z-index: -1;
-    animation: backgroundAnimation 100s infinite;
+    animation: backgroundAnimation 50s infinite;
 }
 
 @keyframes backgroundAnimation {
@@ -27,7 +27,7 @@ body::after
     }
     50%{
         filter: blur(10px);
-        transform: rotateZ(30deg);
+        transform: rotateZ(30deg) scale(2);
     }
     100%{
         filter: blur(5px);
@@ -74,6 +74,12 @@ body::after
     position:absolute;
     width: 30em;
     margin-top:10em;
+    transition: all 800ms;
+}
+
+.form-box:hover
+{
+    box-shadow: 1px 1px 15px whitesmoke;
 
 }
 
@@ -90,6 +96,12 @@ body::after
 .user-UI
 {
     margin-top: 10em;
+    transition: all 500ms;
+}
+
+.user-UI:hover
+{
+    box-shadow: 1px 1px 15px whitesmoke;
 }
 
 .data-box-item

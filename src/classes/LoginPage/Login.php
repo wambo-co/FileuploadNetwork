@@ -20,7 +20,6 @@ class Login
 
     public function login()
     {
-        // new ist das was ich aus der datenbank bekomme
         $query = "SELECT * FROM `useraccounts` WHERE `username` LIKE '$this->username'";
         $result = mysqli_query($this->mysqlConnection, $query);
         $check = mysqli_fetch_array($result);

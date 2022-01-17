@@ -9,11 +9,13 @@ class GetUserData extends Upload
     protected $userid;
     protected $mysqlConnection;
 
+
     public function __construct($userid, $mysqlConnection)
     {
         $this->userid = $userid;
         $this->mysqlConnection = $mysqlConnection;
     }
+
 
     public function getData()
     {
@@ -26,6 +28,8 @@ class GetUserData extends Upload
         }
         return $calledData;
     }
+
+
     public function getDataId()
     {
         $command = "SELECT * FROM `userfiles` WHERE `userid` = $this->userid";
@@ -37,6 +41,7 @@ class GetUserData extends Upload
         }
         return $calledData;
     }
+
 
     public function getDataLocation()
     {
@@ -59,6 +64,7 @@ class GetUserData extends Upload
         return count($result);
     }
 
+
     public function getDataSize()
     {
         $command = "SELECT * FROM `userfiles` WHERE `userid` = $this->userid";
@@ -70,6 +76,7 @@ class GetUserData extends Upload
         }
         return $calledData;
     }
+
 
     public function getDataUploadTime()
     {

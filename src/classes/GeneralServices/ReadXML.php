@@ -20,6 +20,4 @@ class ReadXML
         $xml = json_decode($json, true);
         return $xml;
     }
-
-
 }

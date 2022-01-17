@@ -23,7 +23,6 @@ class UserBody
 
     public function routingInsideUserSite()
     {
-        // ='index.php?delete=$userdataid[$i]&fileSize=$dataSize[$i]'><i class='bi bi-file-earma
         if(isset($_GET['delete'])){
             $fileId = $_GET['delete'];
             $fileSize = $_GET['fileSize'];
@@ -79,23 +78,18 @@ class UserBody
         $dataSize = $userFiles->getDataSize();
 
         $loadUserStorage = new storageController(
-        $_SESSION['username'],
-            0,0,
-            $this->mysqlConnection
-            );
-
+        $_SESSION['username'], 0,0, $this->mysqlConnection);
 
         $userStorageSpace = (new convertUnit($loadUserStorage->getUserFullSpace()))->convertToMb();
         $userUsedStorageSpace =(new convertUnit($loadUserStorage->getUserActualSpaceUsage()))->convertToMb();
         $userUsedStoragePercent = $loadUserStorage->getUserUsedSpaceInPercent($userStorageSpace,$userUsedStorageSpace);
-
 
         $bodyGeneratedHtml ="
         <div class='user-UI box'>
         <form action='index.php' method='post' enctype='multipart/form-data'>
             <input type='file' name='file' class='form-control-file'>
             <button type='submit' name='upload' class='button is-small is-light'>Hochladen</button>
-            <button class='button is-small ' onclick='window.open('userInfo.php')'><i class='bi bi-person-fill'></i></button>
+            <button class='button is-small '><i class='bi bi-person-fill'></i></button>
             <button  name='logout' class='button is-small'><i class='bi bi-box-arrow-right'></i></button>
         </form>
           <progress class='progress'  value='$userUsedStoragePercent' max='100'></progress>
