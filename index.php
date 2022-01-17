@@ -1,36 +1,23 @@
 <?php
 session_start();
 require_once ('vendor/autoload.php');
-use fileUploadNetwork\{Header, LoginBody, RegisterBody, UserBody, ViewController, ReadXML};
+use BaseElements\Header;
+use GeneralServices\LanguageSelector;
+use Controller\ViewController;
+use LoginPage\LoginBody;
+use RegisterPage\RegisterBody;
+use UserPage\UserBody;
 
-// Datenbank Verbindung
+// Datenbank Verbindung //
 $db_db = 'uploadyourdata';
 $db_connection = new mysqli("localhost", "root","root",$db_db);
 
-// Select Language //
-if($_GET['language'] == "russian"){
-    $xml = new ReadXML('src/xml_languages/russian_language.xml');
-    setcookie("language", "russian");
-}else if($_GET['language'] == "german"){
-    $xml = new ReadXML('src/xml_languages/german_language.xml');
-    setcookie("language", "german");
-}else if($_GET['language'] == "china"){
-    $xml = new ReadXML('src/xml_languages/chinesisch_language.xml');
-    setcookie("language", "china");
-}else{
-    if($_COOKIE['language'] == "german"){
-        $xml = new ReadXML("src/xml_languages/german_language.xml");
-    }else if($_COOKIE['language'] == "china"){
-        $xml = new ReadXML("src/xml_languages/chinesisch_language.xml");
-    }else if($_COOKIE['language'] == "russian"){
-        $xml = new ReadXML("src/xml_languages/russian_language.xml");
-    }else {
-        $xml = new ReadXML("src/xml_languages/german_language.xml");
-    }
-}
+// Sprache wählen und XML laden //
+$selector = new LanguageSelector();
+$xml = $selector->getLanguage();
 $xml = $xml->getArray();
 
-// Seiten erstellen aus XML
+// Seiten generieren aus der XML Datei //
 $header = new Header($xml['header']['name'], $xml['header']['css'], $xml['header']['js']);
 
 $loginSiteBody = new LoginBody($xml['loginpage']['username'], $xml['loginpage']['password'],
@@ -46,9 +33,11 @@ $view = new ViewController($db_connection, $loginSiteBody, $registerSiteBody, $u
 $view->isLoggedIn();
 ?>
 <html lang="de">
-<head><?=$header->generateHeader(); ?></head>
+<head>
+    <?=$header->generateHeader(); ?>
+</head>
 <body>
-<?=$view->route(); ?>
+    <?=$view->route(); ?>
 </body>
 </html>
 

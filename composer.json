@@ -2,7 +2,7 @@
     "name": "maximgofman/fileupload-network",
     "autoload": {
         "psr-4": {
-            "fileUploadNetwork\\": "src/classes/FileUploadNetwork"
+            "": "src/classes"
         }
     },
     "require": {}

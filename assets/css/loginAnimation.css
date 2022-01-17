@@ -1,0 +1,38 @@
+.anim-box
+{
+    margin-top:25%;
+    clip-path: inset(0px 0px);
+    animation: intro;
+    opacity: 1;
+    animation-duration: 2.5s;
+    transform: translateY(-30px);
+    animation-fill-mode: forwards;
+}
+#topic
+{
+    font-family: lato;
+    font-weight: bold;
+    font-size: xx-large;
+}
+@keyframes intro {
+    0%{
+        opacity:0;
+        clip-path: inset(12px 0px);
+        transform: translateY(-30px);
+    }
+    50%{
+        opacity: 1;
+        clip-path: inset(0px 0px);
+        transform: translateY(0px);
+
+    }
+    90%{
+        clip-path: inset(50px 0px);
+        transform: translateY(30px);
+    }
+    100%{
+        clip-path: inset(50px 0px);
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
